@@ -5,7 +5,7 @@ require_once("includes/classes/VideoDetailsFormProvider.php");
 
 
 <div class="column">
-    <center>
+     <div class="text-center">
         <img src="VideoTubeLogo.png">
         <h2>WinsVideo Guidelines</h2>
         <br><h5>Community Guidelines</h5>
@@ -19,18 +19,18 @@ require_once("includes/classes/VideoDetailsFormProvider.php");
         <br>6. Videos contains sexual related, pornographic videos will be removed and channel will also be terminated.
         <br>7. No Doxxing, or showing personal information.
         <br>8. Video containing false information will be removed
-        </center>
+    </div>
     <br><br>
-        <center>
+        <div class="text-center">
         <h5>Copyright Guidelines</h5>
         <p>We respect your content creation on the website, we do not support duplication of videos on our platform. Follow these guidelines, on how to create your content.</p>
 
         1. Videos which is duplicated title, will be checked before any action.
         <br>2. Videos contains copyrighted music, and, images, will be checked, and labeled as copyrighted material.
-        <br>3. For music creators, who created their own music and published to WinsVideo, please email us at admin@winsvideo.net for us to check the music before you publish it.
-    </center>
+        <br>3. For music creators, who created their own music and published to WinsVideo, please email us at <a mailto="admin@winsvideo.net">admin@winsvideo.net</a> for us to check the music before you publish it.
+    </div>
     <br><br>
-    <center>
+   <div class="text-center">
         <h5>Privacy Policy</h5>
         <p>We provide WinsVideo for users to upload many kinds of videos, through our website (This Website), We have our official application (still in development) via andriod app. Here are information about the data that we would collect from you.</p>
 
@@ -44,7 +44,7 @@ require_once("includes/classes/VideoDetailsFormProvider.php");
         <h6>Where will your information be stored?</h6>
         <p>WinsVideo is located in the country of Thailand (South East Asia). Made by WinsDominoes. </p>
 
-        </center>
+        ,/div>
         
 </div>
 
