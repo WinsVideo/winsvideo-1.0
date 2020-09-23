@@ -1,4 +1,8 @@
 <?php
+
+header('Content-Type: text/html; charset=utf-8'); 
+
+
 require_once("includes/header.php");
 require_once("includes/classes/SearchResultsProvider.php");
 
@@ -7,7 +11,7 @@ if(!isset($_GET["term"]) || $_GET["term"] == "") {
     exit();
 }
 
-$term = $_GET["term"];
+$term = htmlspecialchars(strip_tags($_GET["term"]));
 
 if(!isset($_GET["orderBy"]) || $_GET["orderBy"] == "views") {
     $orderBy = "views";
@@ -17,14 +21,16 @@ else {
 }
 
 $searchResultsProvider = new SearchResultsProvider($con, $userLoggedInObj);
+
 $videos = $searchResultsProvider->getVideos($term, $orderBy);
 
 $videoGrid = new VideoGrid($con, $userLoggedInObj);
 ?>
 <div class="largeVideoGridContainer">
 
-    <?php
+    <div class="content">
 
+    <?php
     if(sizeof($videos) > 0) {
         echo $videoGrid->createLarge($videos, sizeof($videos) . " results found", true);
     }
@@ -32,8 +38,11 @@ $videoGrid = new VideoGrid($con, $userLoggedInObj);
         echo "No results found";
     }
 
+    
+
     ?>
 
+    </div>
 </div>
 
 

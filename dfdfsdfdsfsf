@@ -1,0 +1,80 @@
+<p>Your Channel</p>
+<hr>
+	<?php 
+
+	$conn2 = mysqli_connect("localhost", "root", "", "videotube");
+		$sql2 = "SELECT firstName, lastName, username, profilePic FROM users WHERE username = '".$_SESSION['userLoggedIn']."'"; 
+		
+		$result = $conn2->query($sql2);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<tr><td><img width='70' height='70' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - <tr><td><a href=profile.php?username=".$row["username"].">" .$row["username"]."</a></tr></td>&nbsp; | ";
+		}
+			echo "</table><br>";
+				} else { echo "
+					<div class='alert alert-danger' role='alert'>
+						 You are not signed in
+					</div>
+				"; }
+$conn2->close();
+
+	?>
+
+
+<p>Featured Creators</p>
+<hr>
+<?php 
+	$conn = mysqli_connect("localhost", "root", "", "videotube");
+		$sql = "SELECT firstName, lastName, username, profilePic FROM users order by RAND() LIMIT 10";
+		$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<tr><td><img width='70' height='70' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - <tr><td><a href=profile.php?username=".$row["username"].">" .$row["username"]."</a></tr></td>&nbsp; | ";
+		}
+			echo "</table>";
+				} else { echo "Error"; }
+$conn->close();
+	
+?> 
+
+<section class="blurrer" style="height: auto !important; min-height: 0px !important; padding: 0px 0px 13px;">
+        <div class="padding_page" style="height: auto !important;">
+        <section class="simple_sct" style="padding:8px;margin-bottom:15px;display:flex;">
+        <div style="display:flex;align-items:center;margin:auto;background:transparent">
+            <img src="/static/img/discord.png" style="width:89px;height:89px;">
+        <div style="margin-left: 15px">
+        <h3>Our public discord</h3>
+            Join our public discord with <a href="https://discord.gg/75YmUkt">this link!</a>.
+        </div>
+		<img src="/static/img/twitter.png" style="width:89px;height:89px;">
+        <div style="margin-left: 15px">
+        <h3>Our Official Twitter Page</h3>
+            Get updates from our Twitter here! <a href="https://twitter.com/WinsVideo">this link!</a>.
+        </div>
+        </div>
+		
+    </section>
+
+
+<?php require_once("includes/footer.php"); ?>
+
+<html>
+    <head>
+    <meta name="description" content="WinsVideo is a video sharing platform that is easy to use, and creator friendly. Upload Your Style Now!">
+    <meta name="keywords" content="WinsVideo,WinsVideo.net,Video,Sharing,Platform,Creator,Friendly">
+    </head>
+</html>
+
+<div class='alert alert-primary'>
+						<a href='#' class='close' data-dismiss='alert'>&times;</a>
+						<strong>MOBILE USER?</strong> Sign Up <a href='signUp.php'>HERE!</a>    
+						</div>
+							
+						<div class='alert alert-info'>
+						<a href='#' class='close' data-dismiss='alert'>&times;</a>
+						<strong>MOBILE USER?</strong> Sign In <a href='signIn.php'>HERE!</a>    
+						</div>

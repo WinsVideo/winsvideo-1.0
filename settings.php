@@ -59,7 +59,7 @@ if(isset($_POST["savePasswordButton"])) {
     }
 }
 ?>
-<div class="settingsContainer column">
+<div class="settingsContainer column article animated slideInUp">
 
     <div class="formSection">
         <div class="message">
@@ -81,6 +81,17 @@ if(isset($_POST["savePasswordButton"])) {
         <?php
             echo $formProvider->createPasswordForm();
         ?>
+    </div>
+
+    <div class="formSection">
+        <h4>Other Customizations can be accessed at the pencil icon.</h4>
+        <?php 
+            $usernameLoggedIn = User::isLoggedIn() ? $_SESSION["userLoggedIn"] : "";
+            $userLoggedInObj = new User($con, $usernameLoggedIn);
+
+            echo "<a href='studio.php?username=$usernameLoggedIn'>Or click this :D</a>"; 
+        ?>
+        
     </div>
 
 </div>

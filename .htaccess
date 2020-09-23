@@ -1,0 +1,12 @@
+#Disable File Check
+Options -Indexes
+
+ErrorDocument 404 /errors/error404.php
+
+ErrorDocument 403 /errors/error403.php
+
+RewriteEngine on
+RewriteBase /
+RewriteRule ^(.+)\.php$ /$1 [R,L]
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*?)/?$ /$1.php [NC,END]

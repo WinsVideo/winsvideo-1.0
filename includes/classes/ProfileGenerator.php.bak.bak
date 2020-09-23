@@ -1,0 +1,279 @@
+<style>
+			@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+			 div.subs { 
+				font-family: 'Roboto', sans-serif; 
+			font-weight: 300;
+			color: #455a64;
+				font-size: 85px; 
+			}
+
+			div.subCount { 
+				font-family: 'Roboto', sans-serif; 
+			font-weight: 300;
+			color: #455a64;
+				font-size: 85px; 
+			}
+
+			div.viewCount2 { 
+				font-family: 'Roboto', sans-serif; 
+			font-weight: 300;
+			color: #455a64;
+				font-size: 85px; 
+			}
+
+			div.totalVids { 
+				font-family: 'Roboto', sans-serif; 
+			font-weight: 300;
+			color: #455a64;
+				font-size: 85px; 
+			}
+
+			margin: 0; height: 100%; overflow: hidden; 
+			
+			
+
+		</style>
+<?php
+require_once("ProfileData.php");
+class ProfileGenerator {
+
+    private $con, $userLoggedInObj, $profileData;
+
+    public function __construct($con, $userLoggedInObj, $profileUsername) {
+        $this->con = $con;
+        $this->userLoggedInObj = $userLoggedInObj;
+        $this->profileData = new ProfileData($con, $profileUsername);
+    }
+
+    public function create() {
+        e$profileUsername = $this->profileData->getProfileUsername();
+        
+        if(!$this->profileData->userExists()) {
+            return "User does not exist";
+        }
+
+        $coverPhotoSection = $this->createCoverPhotoSection();
+        $headerSection = $this->createHeaderSection();
+        $tabsSection = $this->createTabsSection();
+        $contentSection = $this->createContentSection();
+        return "<div class='profileContainer'>
+                    $coverPhotoSection
+                    $headerSection
+                    $tabsSection
+                    $contentSection
+                </div>";
+    }
+
+    public function createCoverPhotoSection() {
+        $coverPhotoSrc = $this->profileData->getCoverPhoto();
+        $name = $this->profileData->getProfileUserFullName();
+        return "<div class='coverPhotoContainer'>
+                    <img src='$coverPhotoSrc' class='coverPhoto'>
+                    <span class='channelName'>$name</span>
+                </div>";
+    }
+
+    public function createHeaderSection() {
+        $profileImage = $this->profileData->getProfilePic();
+        $name = $this->profileData->getProfileUserFullName();
+        $subCount = $this->profileData->getSubscriberCount();
+        $subCount2 = $this->profileData->getSubscriberCount();
+        $button = $this->createHeaderButton();
+		
+	
+        return "<div class='profileHeader'>
+                    <div class='userInfoContainer'>
+                        <img class='profileImage' src='$profileImage'>
+                        <div class='userInfo'>
+                            <span class='title'>$name</span>
+                            <span class='subscriberCount'>$subCount Subscribers</span>
+                        </div>
+                    </div>
+                    <div class='buttonContainer'>
+                        <div class='buttonItem'>    
+                            $button
+                        </div>
+                    </div>
+
+                    <div id='subs' class='subs'>
+                            $subCount2
+                        </div>
+                     
+                    
+                </div>";
+    }
+
+    public function createTabsSection() {
+
+        return "<ul class='nav nav-tabs' role='tablist'>
+					<li class='nav-item'>
+                    <a class='nav-link active' id='home-tab' data-toggle='tab' 
+                        href='#home' role='tab' aria-controls='home' aria-selected='true'>HOME</a>
+                    </li>
+                    <li class='nav-item'>
+                    <a class='nav-link' id='videos-tab' data-toggle='tab' 
+                        href='#videos' role='tab' aria-controls='videos' aria-selected='false'>VIDEOS</a>
+                    </li>
+					<li class='nav-item'>
+                    <a class='nav-link' id='statistics-tab' data-toggle='tab' href='#statistics' role='tab' 
+                        aria-controls='statistics' aria-selected='false'>STATISTICS</a>
+                    </li>
+                    <li class='nav-item'>
+                    <a class='nav-link' id='about-tab' data-toggle='tab' href='#about' role='tab' 
+                        aria-controls='about' aria-selected='false'>ABOUT</a>
+                    </li>
+                </ul>";
+    }
+
+    public function createContentSection() {
+        
+        $videos = $this->profileData->getUsersVideos();
+
+        if(sizeof($videos) > 0) {
+            $videoGrid = new VideoGrid($this->con, $this->userLoggedInObj);
+            $videoGridHtml = $videoGrid->create($videos, null, false);
+        }
+        else {
+            $videoGridHtml = "<span>This user has no videos</span>";
+        
+            $subCount2 = $this->profileData->getSubscriberCount();
+        
+        }
+
+        
+
+        $aboutSection = $this->createAboutSection();
+		$homeSection = $this ->createHomeSection(); 
+		$statisticsSection = $this->createStatisticsSection(); 
+		
+        return "<div class='tab-content channelContent'>
+					<div class='tab-pane fade show active' id='home' role='tabpanel' aria-labelledby='home-tab'>
+                        $homeSection
+                    </div>
+                    <div class='tab-pane fade' id='videos' role='tabpanel' aria-labelledby='videos-tab'>
+                        $videoGridHtml
+                    </div>
+					 <div class='tab-pane fade' id='statistics' role='tabpanel' aria-labelledby='statistics-tab'>
+                        $statisticsSection
+                    </div>
+                    <div class='tab-pane fade' id='about' role='tabpanel' aria-labelledby='about-tab'>
+                        $aboutSection
+                    </div>
+                </div>";
+    }
+
+
+	private function createStatisticsSection() { 
+		$subCount3 = $this->profileData->getSubscriberCount(); 
+		$totalViews = $this->profileData->getTotalViews2();
+		$name = $this->profileData->getProfileUserFullName(); 
+		$totalVids = $this->profileData->getTotalVids(); 
+		
+		$html = "<h3>$name's Public Statistics</h3>
+				<hr>
+				<span>$name's Subscriber Count</span>
+				<div class='subCount'>
+					$subCount3	
+				</div>
+				<span>$name's Total View Count</span>
+				<div class='viewCount2'>
+					$totalViews
+				</div>
+				<span>$name's Total Videos Uploaded</span>
+				<div class='totalVids'>
+					Coming Soon...
+				</div>"; 
+
+		return $html; 
+
+	} 
+
+	private function createHomeSection() { 
+		$profileDate = $this->profileData->getSignUpDate();
+        $name = $this->profileData->getProfileUserFullName();
+        $subCount2 = $this->profileData->getSubscriberCount();
+		$aboutText = $this->profileData->getAboutText(); 
+		$videos = $this->profileData->getUsersVideos();
+		$totalViews = $this->profileData->getTotalViews2(); 
+		$country = $this->profileData->getCountry(); 
+		
+        if(sizeof($videos) > 0) {
+            $videoGrid = new VideoGrid($this->con, $this->userLoggedInObj);
+            $videoGridHtml = $videoGrid->create($videos, null, false);
+        }
+        else {
+            $videoGridHtml = "<span>This user has no videos</span>";
+        
+       
+        
+        }
+
+		$html = "<div class='channelDescription'>
+		<h3>About: $name</h3>
+						$aboutText
+					</div>
+					
+				<div class='country'>
+				<h3>Country </h3>
+						$country
+				</div>
+					
+				<div class='videos'>
+				<h3>All Videos</h3>
+				<p>Video Uploaded by $name</p>
+				<hr>
+					$videoGridHtml
+				</div>"; 
+
+
+			return $html; 
+	} 
+	
+
+    private function createHeaderButton() {
+        if($this->userLoggedInObj->getUsername() == $this->profileData->getProfileUsername()) {
+            return "";
+        }
+        else {
+            return ButtonProvider::createSubscriberButton(
+                        $this->con, 
+                        $this->profileData->getProfileUserObj(),
+                        $this->userLoggedInObj);
+        }
+    }
+
+    private function createAboutSection() {
+
+        $profileDate = $this->profileData->getSignUpDate();
+        $name = $this->profileData->getProfileUserFullName();
+        $subCount2 = $this->profileData->getSubscriberCount();
+		$aboutText = $this->profileData->getAboutText(); 
+		$links = $this->profileData->getLinks(); 
+
+        $html = "<div class='section'>
+                    <div class='title'>
+                        <b>About $name</b>
+                           <p>$aboutText</p>
+                        <span><b>Details</b></span>
+                    </div>
+                    <div class='values'>";
+
+        $details = $this->profileData->getAllUserDetails();
+        foreach($details as $key => $value) {
+            $html .= "<span>$key: $value</span>";
+        }
+
+        $html .= "</div></div>
+				<br>
+				<div class='links'>
+				<b>$name's Links: </b><br>
+					$links
+				</div>";
+
+        return $html;
+    }
+}
+?>
+
+
+

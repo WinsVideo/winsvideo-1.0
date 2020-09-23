@@ -1,0 +1,190 @@
+<?php require_once("includes/header.php"); 
+
+	error_reporting(0); ?>
+
+<div class="column">
+	
+	<div class="alert alert-success">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <strong>UPDATE!</strong> WinsVideo server is getting full! Read more here! <a href="#">HERE!</a>    
+        </div>
+	
+	<div class="tabs">
+		
+				
+				&nbsp; 
+				<a class="btn btn-primary" href="index.php" role="button">Home</a>
+
+				&nbsp; &nbsp; &nbsp; 
+				<a class="btn btn-primary" href="latest.php" role="button">Videos</a>
+				&nbsp; &nbsp; &nbsp; 
+				<a class="btn btn-primary" href="statistics.php" role="button">Channels</a>
+					&nbsp; &nbsp; &nbsp;  
+				<a class="btn btn-primary" href="http://winsdominoes.ddns.net:8080" role="button">Community</a>
+			
+				
+	</div>
+		
+		
+
+
+<div class="videoSection">
+    <?php
+		
+
+    $subscriptionsProvider = new SubscriptionsProvider($con, $userLoggedInObj);
+    $subscriptionVideos = $subscriptionsProvider->getVideos();
+
+    $videoGrid = new VideoGrid($con, $userLoggedInObj->getUsername());
+	
+	echo $videoGrid->create(null, "<p>Recommended</p>", false);
+	?> 
+		
+		<hr>
+
+	 <p>Featured Posts</p>
+
+<?php 
+	$conn = mysqli_connect("localhost", "root", "", "videotube");
+		$sql = "SELECT firstName, lastName, username, profilePic, status FROM users order by RAND() LIMIT 1";
+		$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<img width='70' height='70' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - 
+			 <a href=profile.php?username=".$row["username"].">" .$row["username"]."</a>&nbsp; <br><br>" .$row["username"]. "'s Status Now: <br>  <hr> <br>";
+		}
+			echo "";
+				} else { echo "Error"; }
+$conn->close();
+	
+
+?>
+
+	<?php 
+
+    if(User::isLoggedIn() && sizeof($subscriptionVideos) > 0) {
+        echo $videoGrid->create($subscriptionVideos, "Subscriptions", false);
+    }
+
+    
+
+
+    ?>
+</div>
+	<b>Your Channel</b>
+<hr>
+	<?php 
+
+	$conn2 = mysqli_connect("localhost", "root", "", "videotube");
+		$sql2 = "SELECT firstName, lastName, username, profilePic FROM users WHERE username = '".$_SESSION['userLoggedIn']."'"; 
+		
+		$result = $conn2->query($sql2);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<tr><td><img width='70' height='70' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - <tr><td><a href=profile.php?username=".$row["username"].">" .$row["username"]."</a></tr></td>&nbsp; | ";
+		}
+			echo "</table><br>";
+				} else { echo "
+					You are not signed in.
+					<br>Need an account? Sign Up <a href='signUp.php'>Here</a>
+					<br>Already have an account? Sign In <a href='signIn.php'>Here</a>
+				"; }
+$conn2->close();
+
+	?> 
+	<br>
+	<br><b>Featured Creators</b>
+<hr>
+<?php 
+	$conn = mysqli_connect("localhost", "root", "", "videotube");
+		$sql = "SELECT firstName, lastName, username, profilePic FROM users order by RAND() LIMIT 10";
+		$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<tr><td><img width='70' height='70' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - <tr><td><a href=profile.php?username=".$row["username"].">" .$row["username"]."</a></tr></td>&nbsp; | ";
+		}
+			echo "</table>";
+				} else { echo "Error"; }
+$conn->close();
+	
+?> 
+<hr>
+<div class="footer">
+	<ul class="nav nav-pills">
+    			<li class="nav-item">
+        			<a href="http://winsdominoes.ddns.net:8080" class="nav-link">Community</a>
+    			</li>
+
+				<li class="nav-item">
+        			<a href="#" class="nav-link" data-toggle="modal" data-target="#guidelines">Guidelines</a>
+    			</li>
+
+				<li class="nav-item">
+        			<a href="#" class="nav-link" data-toggle="modal" data-target="#about">About</a>
+    			</li>
+			</ul>
+		<div>
+</div>
+
+<div class="modal fade" id="guidelines" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">WinsVideo Guidelines</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>WinsVideo Guidelines</b>
+
+<br>Community Guidelines
+<br>The Community Guidelines for WinsVideo is the rule for every user to follow for the platform
+<br>to make this platform better.
+
+<br>1. Video Contains Bad Words, Appearance will be deleted.
+<br>2. Videos which is duplicated title, or copied will be deleted.
+<br>3. Videos contains Copyrighted Music, Images, And Video, will be claimed. And sometimes will be deleted.
+<br>4. Video Contains quarells, bad politics, weapon releated games, alcoholic videos will be deleted.
+<br>5. Video Contains Controversy, Antisemetic Content, and weapon related games, will be deleted.
+<br>6. Videos contains sexual related, pornographic videos will be deleted and channel will also be terminated.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">About</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <b>About WinsVideo</b>
+		<p>WinsVideo is a video platform for users to upload their videos to the internet. 
+		<br>Upload your style to make the platform more lively and better
+		<br></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	
+<?php include_once("includes/footer.php") ?> 
+
+                

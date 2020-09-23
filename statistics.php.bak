@@ -1,0 +1,65 @@
+<?php 
+include_once("includes/header.php"); 
+	include_once("all-videos/VideoGrid.php"); 
+	include_once("all-videos/VideoGridItem.php"); 
+?> 
+
+<div class="column">
+    <h2>Statistics</h2>
+    <p>WinsVideo's Site Statistics</p>
+    <p>WinsVideo Public Data</p>
+    <table class="table table-hover">
+  <thead>
+    <tr>
+      
+      <th scope="col"><a href="statistics/total-views-realtime.php">Videos (Total) &nbsp;<a href="realtime/new-realtime-views.php">Videos List </a></a></th>
+      <th scope="col"><a href="statistics/total-views.php">Views (Total) </a></th>
+      <th scope="col"><a href="realtime/comments-realtime.php">Comments (Total) </a></th>
+      <th scope="col"><a href="realtime/user-realtime.php">Users (Total) </a> &nbsp;<a href="realtime/user-all.php">Users List </a></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      
+      <td><iframe src="statistics/total-views-realtime.php" width="130" height="120" frameBorder="0"></iframe> </td>
+      <td><iframe src="statistics/total-views.php" width="250" height="120" frameBorder="0"></iframe></td>
+      <td><iframe src="realtime/comments-realtime.php" width="130" height="120" frameBorder="0"></iframe></td>
+      <td><iframe src="realtime/user-realtime.php" width="130" height="120" frameBorder="0"></iframe></td>
+    </tr>
+    
+  </tbody>
+</table>
+    
+	
+<div class="videos">
+	<?php 
+		$videoGrid = new VideoGrid2($con, $userLoggedInObj->getUsername()); 
+
+		echo $videoGrid->create(null, "All Videos (Latest Uploads)", false);
+	?>
+</div>   
+
+	<div class="channels">
+		<h3>All Channels</h3>
+		<p>All Channels on WinsVideo, ordered by subscribers/followers</p>
+		<?php 
+		$conn = mysqli_connect("localhost", "root", "", "videotube");
+		$sql = "SELECT firstName, lastName, username, profilePic, subs FROM users ORDER BY subs DESC";
+		$result = $conn->query($sql);
+			if ($result->num_rows > 0) {
+				// output data of each row
+			while($row = $result->fetch_assoc()) {
+					echo "<tr><td><img width='90' height='90' src='" . $row["profilePic"] . "'><b>" . $row["firstName"] . "&nbsp;"
+			. $row["lastName"] . "</b> - <tr><td><a href=profile.php?username=".$row["username"].">" .$row["username"]."</a></tr></td>&nbsp; ".$row["subs"]." Subscribers | ";
+		}
+			echo "</table>";
+				} else { echo "Error"; }
+$conn->close();
+	?> 
+	</div>
+    
+
+<?php 
+include_once("includes/footer.php"); 
+?> 
+

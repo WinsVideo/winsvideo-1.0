@@ -1,18 +1,28 @@
 <?php 
 require_once("includes/header.php");
 require_once("includes/classes/VideoDetailsFormProvider.php");
+
+
 ?>
 
 
 <div class="column">
 
+<div class="alert alert-warning">
+    <strong>WARNING! </strong> If your video has a big file size, the conversion might take a while. 
+  </div>
+
+
+
+<b>Video Requirements</b>
+  <p>1. Video Type: MP4, FLV, WEBM, MKV, VOB, OGV, OGG, AVI, WMV, MOV, MPEG, MPG. 
+    <br> 2. Max Video / File Size: 100 MB</p>
+  <hr>
+
     <?php
     $formProvider = new VideoDetailsFormProvider($con);
     echo $formProvider->createUploadForm();
     ?>
-
-
-</div>
 
 <script>
 $("form").submit(function() {
@@ -35,6 +45,7 @@ $("form").submit(function() {
   </div>
 </div>
 
+</div>
 
 
 

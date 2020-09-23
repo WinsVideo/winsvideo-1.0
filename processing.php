@@ -9,10 +9,11 @@ if(!isset($_POST["uploadButton"])) {
 }
 
 // 1) create file upload data
-$videoUpoadData = new VideoUploadData(
+$videoUploadData = new VideoUploadData(
                             $_FILES["fileInput"], 
                             $_POST["titleInput"],
                             $_POST["descriptionInput"],
+							$_POST["tagsInput"],
                             $_POST["privacyInput"],
                             $_POST["categoryInput"],
                             $userLoggedInObj->getUsername()   
@@ -20,10 +21,19 @@ $videoUpoadData = new VideoUploadData(
 
 // 2) Process video data (upload)
 $videoProcessor = new VideoProcessor($con);
-$wasSuccessful = $videoProcessor->upload($videoUpoadData);
+$wasSuccessful = $videoProcessor->upload($videoUploadData);
+$insert = new VideoProcessor($con);
 
 // 3) Check if upload was successful
 if($wasSuccessful) {
-    echo "Upload successful";
+    echo "<div class='column'>
+			<h2>Upload successful</h2>
+			<a href='latest.php'>Latest Uploads</a>
+		  </div>";
+} else {
+    echo "<div class='column'>
+            <h2>Upload was unsuccessful</h2>
+            <p>Please try again</p>
+          </div>";
 }
 ?>
