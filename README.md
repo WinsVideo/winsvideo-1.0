@@ -31,6 +31,11 @@ Here are a couple of features that are included in WinsVideo.
 
 And so on. 
 
+## More Info
+
+This project uses ffmpeg to covert files to mp4. Right now, we are experiencing problems about using it on Linux system (tested with Debian 10). 
+
+
 ## About this project
 
 I do no guarantee that this project will be safe from XSS vulnerabilities, I made this so people could help find those vulnerabilites and help patch the loophole in the backend system. 
