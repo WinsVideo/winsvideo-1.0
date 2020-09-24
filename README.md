@@ -33,7 +33,7 @@ And so on.
 
 ## About this project
 
-I do no guarantee that this project will be safe from XSS vulnerabilities, I made this so people could help find those vulnerabilites and help patch the loophole in te backend system. 
+I do no guarantee that this project will be safe from XSS vulnerabilities, I made this so people could help find those vulnerabilites and help patch the loophole in the backend system. 
 
 ## Credits
 
