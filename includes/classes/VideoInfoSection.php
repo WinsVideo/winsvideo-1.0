@@ -71,12 +71,17 @@ class VideoInfoSection {
                           <div class='modal-dialog' role='document'>
                             <div class='modal-content'>
                               <div class='modal-header'>
-                                <h5 class='modal-title' id='exampleModalLabel'>Share the video</h5>
+                                <h5 class='modal-title' id='exampleModalLabel'>Share / Embed</h5>
                                 <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
                                   <span aria-hidden='true'>&times;</span>
                                 </button>
                               </div>
                               <div class='modal-body'>
+
+                              	<form>
+									  <input type='text' class='form-control' id='videoName' name='videoName' value='https://winsvideo.net/embed.php?id=$id' readonly><br><br>
+									</form>
+
                                 http://winsvideo.net/watch.php?id=$id
                               </div>
                               <div class='modal-footer'>

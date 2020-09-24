@@ -15,7 +15,8 @@ if(isset($_POST["submitButton"])) {
 
     if($wasSuccessful) {
         $_SESSION["userLoggedIn"] = $username;
-        header("Location: index.php");
+        header("Location: https://winsvideo.net/index.php");
+        exit;
     }
 
 }

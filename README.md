@@ -1,50 +1,28 @@
-# WinsVideo
+# Custom HTML5 Video
 
-A small video sharing site for people. 
+Build a custom HTML5 video player with JavaScript. Features:
 
-## How was this made?
+- Video and audio playback
+- Native fullscreen
+- Picture-in-Picture
+- Custom controls
+- Keyboard shortcuts
 
-This was made by me, Win. I learned a course on udemy and coded this. I added alot of features, but most of them are bad code. I made this repo so, my friends and others could help me develop this platform. 
+Tutorial: https://freshman.tech/custom-html5-video/
 
-## What programming language was this written in? 
+## Live demo
 
-This website is written in mostly PHP. because it is the language that I'm comfortable with. 
+This project is live at http://custom-html5-video.surge.sh/
 
-## Will this repo be public? 
+## Prerequisites
 
-No, not at the moment. 
+You must have Node.js and npm installed on your machine. This project was built against the following versions:
 
-## What features does the project has? 
+- Node v12.6.0
+- npm v6.9.0
 
-Here are a couple of features that are included in WinsVideo. 
+## Setup
 
-- 1. Uploading
-- 2. Video Conversion
-- 3. Customizing their status
-- 4. Customizing their channel page. 
-- 5. Comment
-- 6. Watch Videos
-- 7. Video Manager (Not really)
-- 8. Channel Statistics
-- 9. Customizaing their account info.
-- 10. Forgot password request
-
-And so on. 
-
-## More Info
-
-This project uses ffmpeg to covert files to mp4. Right now, we are experiencing problems about using it on Linux system (tested with Debian 10). 
-
-
-## About this project
-
-I do no guarantee that this project will be safe from XSS vulnerabilities, I made this so people could help find those vulnerabilites and help patch the loophole in the backend system. 
-
-## Credits
-
-- 1. This udemy course -> https://www.udemy.com/course/youtube-clone/
-- 2. My friends for helping me to test my website. 
-
-## Final Product
-
-You can check the final product at https://winsvideo.net
+- Clone this repo to your machine
+- `cd` into the project folder and run `npm install`
+- Run `npm start`
