@@ -128,8 +128,10 @@ class VideoProcessor {
     }
 
     private function insertVideoData($uploadData, $filePath) {
-        $query = $this->con->prepare("INSERT INTO videos(title, uploadedBy, description, tags, privacy, category, filePath)
-                                        VALUES(:title, :uploadedBy, :description, :tags, :privacy, :category, :filePath)");
+        $uniqid = uniqid(); 
+
+        $query = $this->con->prepare("INSERT INTO videos(title, uploadedBy, description, tags, privacy, category, filePath, url)
+                                        VALUES(:title, :uploadedBy, :description, :tags, :privacy, :category, :filePath, '$uniqid')");
 
         if($uploadData->uploadedBy == null) {
             echo "<div class='column'>

@@ -1,0 +1,46 @@
+td,
+th {
+    border: 1px solid rgb(190, 190, 190);
+    padding: 10px;
+}
+
+
+	div { 
+		
+			} 
+			
+
+
+td {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #eee;
+}
+
+th[scope="col"] {
+    background-color: #696969;
+    color: #fff;
+}
+
+th[scope="row"] {
+    background-color: #d7d9f2;
+}
+
+caption {
+    padding: 10px;
+    caption-side: bottom;
+}
+
+	
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+table {
+    border-collapse: collapse;
+    border: 2px solid rgb(200, 200, 200);
+    letter-spacing: 0.1px;
+    font-family: 'Roboto', sans-serif; 
+		font-weight: 300;
+		color: #455a64;
+				font-size: 9rem; 
+}

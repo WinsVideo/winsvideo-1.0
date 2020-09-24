@@ -40,7 +40,7 @@ if(isset($_POST["saveButton"])) {
         $userLoggedInObj->getUsername()
     );
 
-    if($videoData->updateDetails($con, $video->getId())) {
+    if($videoData->updateDetails($con, $video->getUniqueId())) {
         $detailsMessage = "<div class='alert alert-success'>
                                 <strong>SUCCESS!</strong> Details updated successfully!
                             </div>";
@@ -68,7 +68,7 @@ if(isset($_POST["deleteButton"])) {
     }
 
     // sql to delete a record
-    $sql = "DELETE FROM videos WHERE id=".$_GET["videoId"]. ";" . "DELETE FROM thumbnails WHERE videoId=".$_GET["videoId"]."";
+    $sql = "DELETE FROM videos WHERE url='".$_GET["videoId"]. "';" . "DELETE FROM thumbnails WHERE videoId=".$_GET["videoId"]."";
 
     if (mysqli_multi_query($conn, $sql)) {
       $detailsMessage2 = "<div class='alert alert-info'>

@@ -29,12 +29,12 @@
 	require_once("includes/classes/watchInfo.php"); 
 	require_once("includes/classes/VideoPlayer2.php"); 
 
-	if(!isset($_GET["id"])) {
+	if(!isset($_GET["v"])) {
 	    echo "No url passed into page";
 	    exit();
 	}
 
-	$video = new Video($con, $_GET["id"], $userLoggedInObj);
+	$video = new Video($con, $_GET["v"], $userLoggedInObj);
 
     $videoPlayer = new VideoPlayer($video);
     echo $videoPlayer->create(true);	

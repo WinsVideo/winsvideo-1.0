@@ -19,7 +19,7 @@ class WatchInfo {
 
     public function createGetTitle() {
         $title = $this->video->getTitle(); 
-        $url = $this->video->getId(); 
+        $url = $this->video->getUniqueID(); 
         $thumbnail = $this->video->getThumbnail(); 
         $description = $this->video->getDescription(); 
         $uploadedBy = $this->video->getUploadedBy(); 
@@ -63,7 +63,7 @@ class WatchInfo {
 
 <!-- Video -->
 <meta property='og:type' content='video.other' />
-<meta property='og:url' content='http://winsvideo.net/watch.php?id=$url' />
+<meta property='og:url' content='http://winsvideo.net/watch.php?v=$url' />
 <meta property='og:image' content='http://winsvideo.net/$thumbnail' />
 <meta property='og:image:width' content='1280' />
 <meta property='og:image:height' content='720' />
@@ -73,7 +73,7 @@ class WatchInfo {
 
 <!-- Open Graph / Facebook -->
 <meta property='og:type' content='video.other'>
-<meta property='og:url' content='http://winsvideo.net/watch.php?id=$url'>
+<meta property='og:url' content='http://winsvideo.net/watch.php?v=$url'>
 <meta property='og:title' content='$title - WinsVideo'>
 <meta property='og:description' content='$description'>
 <meta property='og:video' content='https://winsvideo.net/$video' />
@@ -83,10 +83,10 @@ class WatchInfo {
 
 <!-- Twitter -->
 <meta property='twitter:card' content='player' />
-<meta property='twitter:url' content='http://winsvideo.net/watch.php?id=$url' />
+<meta property='twitter:url' content='http://winsvideo.net/watch.php?v=$url' />
 <meta property='twitter:title' content='$title - WinsVideo' />
 <meta property='twitter:description' content='$description' />
-<meta property='twitter:player' content='https://winsvideo.net/embed.php?id=$url' />
+<meta property='twitter:player' content='https://winsvideo.net/embed.php?v=$url' />
 <meta property='twitter:player:width' content='1280' />
 <meta property='twitter:player:height' content='720'/>
 <meta property='twitter:player:stream' content='https://winsvideo.net/$video'/>

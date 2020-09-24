@@ -121,8 +121,10 @@ $conn->close();
     <hr>
   <ul class="nav nav-pills justify-content-center">
           <li class="nav-item">
-              <a href="https://discord.gg/rFArHVd"><img src="https://discord.com/api/guilds/642982549693530123/embed.png" alt="Discord server" /></a>
+              <a href="https://discord.gg/J5G9XZd" class="nav-link">Community</a>
           </li>
+
+          
 
         <li class="nav-item">
               <a href="guidelines.php" class="nav-link">Guidelines</a>

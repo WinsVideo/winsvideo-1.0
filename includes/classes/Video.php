@@ -16,8 +16,8 @@ class Video {
             $this->sqlData = $input;
         }
         else {
-            $query = $this->con->prepare("SELECT * FROM videos WHERE id = :id");
-            $query->bindParam(":id", $input);
+            $query = $this->con->prepare("SELECT * FROM videos WHERE url = :url");
+            $query->bindParam(":url", $input);
             $query->execute();
 
             $this->sqlData = $query->fetch(PDO::FETCH_ASSOC);
@@ -107,6 +107,10 @@ class Video {
 	public function getTags() { 
 		return htmlspecialchars(strip_tags($this->sqlData["tags"]));
 	} 
+
+    public function getUniqueID() {
+        return $this->sqlData["url"]; 
+    }
 
     public function incrementViews() {
         $query = $this->con->prepare("UPDATE videos SET views=views+1 WHERE id=:id");

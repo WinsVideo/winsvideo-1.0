@@ -39,7 +39,7 @@ class VideoInfoSection {
    
 
     private function createPrimaryInfo() {
-        $id = $this->video->getId();
+        $id = $this->video->getUniqueID();
         $title = $this->video->getTitle();
         $views = number_format($this->video->getViews());
         $space = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -79,10 +79,14 @@ class VideoInfoSection {
                               <div class='modal-body'>
 
                               	<form>
-									  <input type='text' class='form-control' id='videoName' name='videoName' value='https://winsvideo.net/embed.php?id=$id' readonly><br><br>
-									</form>
+                                <label>Want to share the video? Use the link below!</label>
+									  <input type='text' class='form-control' id='videoName' name='videoName' value='https://winsvideo.net/watch.php?v=$id' readonly>
+									
+                                <br>
+                                <label>Want to embed the video? Add this to your html page</label>
+                                </form>
 
-                                http://winsvideo.net/watch.php?id=$id
+                                <input type='text' class='form-control' id='videoName' name='videoName' value='&#60;iframe src=&quot;https://winsvideo.net/embed.php?v=$id&quot; width=&quot;560&quot;&nbsp height=&quot;315&quot; allowfullscreen&#62;&#60;/iframe&#62;' readonly>
                               </div>
                               <div class='modal-footer'>
                                 <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
@@ -109,7 +113,7 @@ class VideoInfoSection {
         $line = "";
 
         if($uploadedBy == $this->userLoggedInObj->getUsername()) {
-            $actionButton = ButtonProvider::createEditVideoButton($this->video->getId());
+            $actionButton = ButtonProvider::createEditVideoButton($this->video->getUniqueID());
         }
         else {
             $userToObject = new User($this->con, $uploadedBy);
