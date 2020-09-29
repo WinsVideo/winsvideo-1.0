@@ -130,7 +130,7 @@ class VideoPlayer {
 
 
 		<video id='video' tabindex='-1' class='video-js vjs-matrix vjs-theme-forest vjs-big-play-centered videoPlayer' controls controlslist='nodownload' style='flex: 1;' preload='auto' data-setup='{}'>
-                    <source src='$filePath' type='video/mp4'>
+                    <source src='https://videos.winsvideo.net/$filePath' type='video/mp4'>
          </video>
 
 

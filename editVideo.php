@@ -1,3 +1,5 @@
+
+
 <?php
 
 	error_reporting(0);
@@ -6,6 +8,8 @@ require_once("includes/classes/VideoPlayer.php");
 require_once("includes/classes/VideoDetailsFormProvider.php");
 require_once("includes/classes/VideoUploadData.php");
 require_once("includes/classes/SelectThumbnail.php");
+
+
 
 if(!User::isLoggedIn()) {
     header("Location: signIn.php");
@@ -40,7 +44,7 @@ if(isset($_POST["saveButton"])) {
         $userLoggedInObj->getUsername()
     );
 
-    if($videoData->updateDetails($con, $video->getUniqueId())) {
+    if($videoData->updateDetails($con, $video->getId())) {
         $detailsMessage = "<div class='alert alert-success'>
                                 <strong>SUCCESS!</strong> Details updated successfully!
                             </div>";
@@ -52,6 +56,8 @@ if(isset($_POST["saveButton"])) {
                             </div>";
     }
 }
+
+
 
 if(isset($_POST["deleteButton"])) {
 
@@ -67,13 +73,19 @@ if(isset($_POST["deleteButton"])) {
       die("Connection failed: " . mysqli_connect_error());
     }
 
+    $video2 = new Video($con, $_GET["videoId"], $userLoggedInObj);
+
+    $videoId = $video2->getId(); 
+
     // sql to delete a record
-    $sql = "DELETE FROM videos WHERE url='".$_GET["videoId"]. "';" . "DELETE FROM thumbnails WHERE videoId=".$_GET["videoId"]."";
+    $sql = "DELETE FROM videos WHERE url='".$_GET["videoId"]. "';" . "DELETE FROM thumbnails WHERE videoId='$videoId'";
 
     if (mysqli_multi_query($conn, $sql)) {
       $detailsMessage2 = "<div class='alert alert-info'>
                 <strong>INFO!</strong> Record deleted successfully, Please click the DELETE button again.
             </div>";
+
+            header("refresh: 2;");
     } else {
 
         $detailsMessage2 = "<div class='alert alert-danger'>
@@ -140,6 +152,10 @@ if(isset($_POST["deleteButton"])) {
         ?>
     
     </div>
+
+    
+
+    <meta name="viewport" content="width=device-width, initial-scale=0.88, shrink-to-fit=yes">
 
 </div>
 

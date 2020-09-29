@@ -3,11 +3,10 @@ require_once("includes/config.php");
 require_once("includes/classes/ButtonProvider.php"); 
 require_once("includes/classes/User.php"); 
 require_once("includes/classes/Video.php"); 
-require_once("includes/classes/VideoGrid.php"); 
-require_once("includes/classes/VideoGridItem.php");
+require_once("dashboard-files/VideoGrid.php"); 
+require_once("dashboard-files/VideoGridItem.php");
 require_once("includes/classes/SubscriptionsProvider.php"); 
 require_once("includes/classes/NavigationMenuProvider.php"); 
-
 
 $usernameLoggedIn = User::isLoggedIn() ? $_SESSION["userLoggedIn"] : "";
 $userLoggedInObj = new User($con, $usernameLoggedIn);
@@ -73,6 +72,13 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
     <script src="assets/css/bootstrap-js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> 
     <script src="assets/js/commonActions.js"></script>
     <script src="assets/js/userActions.js"></script>
+
+  <link href="https://vjs.zencdn.net/7.6.6/video-js.css" rel="stylesheet" />
+  <link href="style/animate.css" rel="stylesheet" />
+
+  <!-- If you'd like to support IE8 (for Video.js versions prior to v7) -->
+  <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
+  <script src="https://vjs.zencdn.net/7.6.6/video.js"></script>
 
 
   <style>

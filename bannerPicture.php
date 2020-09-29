@@ -1,4 +1,9 @@
 <?php 
+
+echo "Sorry, This the custom uploader is not available at the moment. ";
+/*
+
+<?php 
 	include_once("includes/header.php"); 
 ?>
 
@@ -53,3 +58,6 @@
 <?php 
 	include_once("includes/footer.php"); 
 ?> 
+
+*/
+?>

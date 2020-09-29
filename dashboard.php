@@ -1,5 +1,5 @@
 <?php 
-	include_once("includes/header.php");
+	include_once("includes/dashboardHeader.php");
 	include_once("includes/classes/User.php");
 	include_once("includes/classes/ProfileData.php"); 
 ?> 
@@ -35,7 +35,7 @@
 			</script>
 
 	<div class="column article animated slideInUp">
-	<center>
+	
 	<?php
 		class ProfileGenerator {
 
@@ -61,24 +61,13 @@
         }
 		
 		$headerSection = $this->createHeaderSection(); 
-        $subscriberSection = $this->createSubscriberSection();
-        $statisticsSection = $this->createViewCountSection();
+        $statsSection = $this->createStatsSection();
         $contentSection = $this->createContentSection();
 		$videoViews = $this->videoViews(); 
         return "<div class='profileContainer'>
 					$headerSection
-					<center>
-					<table width='25%'>
-			<p>Subscriber Count</p>
-
-			$subscriberSection
-
-			<p>View Count</p>
-
-			$statisticsSection
-
-</center>
-
+					
+					$statsSection
 		<h5>Videos uploaded by you. </h5>
 		<p>To edit the video, click on the video and click 'EDIT VIDEO'</p>
 		$contentSection
@@ -100,36 +89,31 @@
 		return $html;
 	} 
 
-	public function createSubscriberSection() {
+	public function createStatsSection() {
 		$subCount = $this->profileData->getSubscriberCount(); 
 		$profilePic = $this->profileData->getProfilePic(); 
 		$name = $this->profileData->getProfileUserFullName(); 
 		$username = $this->profileData->getProfileUsername(); 
+		$viewCount = number_format($this->profileData->getTotalViews2()); 
 		
 		
 
-		$html = "<div class='subCount'>
-					$subCount
-				</div>";
+		$html = "<table class='table'>
+				  <thead>
+				    <tr>
+				      <th scope='col'>Subscriber Count</th>
+				      <th scope='col'>Channel View Count</th>
+				    </tr>
+				  </thead>
+				  <tbody>
+				    <tr>
+				      <td class='subCount'>$subCount</td>
+				      <td class='viewCount'>$viewCount</td>
+				    </tr>
+				  </tbody>
+				</table>";
 		return $html; 
 	}
-
-	public function createViewCountSection() { 
-		
-
-
-		//View Count Section 
-		$subCount = $this->profileData->getSubscriberCount(); 
-		$profilePic = $this->profileData->getProfilePic(); 
-		$name = $this->profileData->getProfileUserFullName(); 
-		$viewCount = $this->profileData->getTotalViews2(); 
-
-		$html = "<div class='viewCount'>
-					$viewCount 
-					</div>"; 
-
-		return $html; 
-	} 
 
 	public function videoViews() { 
 	} 
@@ -141,13 +125,13 @@
 		$videos = $this->profileData->getUsersVideos();
 		if(sizeof($videos) > 0) {
             $videoGrid = new VideoGrid($this->con, $this->userLoggedInObj);
-            $videoGridHtml = $videoGrid->create($videos, null, false);
+            $videoGridHtml = $videoGrid->createLarge($videos, null, false);
         }
         else {
             $videoGridHtml = "<span>This user has no videos</span>";
         }
 
-		$html = "<div class='videos largeVideoGridContainer'>
+		$html = "<div class='videos'>
 					$videoGridHtml
 				</div>
 				
@@ -167,21 +151,33 @@
 		// Display Page 
 		if(isset($_GET["username"])) {
     $profileUsername = $_GET["username"];
-	}
-
-
-
-	else {
+	} else {
 		echo "Channel not found
 		<p>Please login to your account</p>";
     exit();
 	}
+
+	$username = $_GET["username"]; 
+
+	$session = $_SESSION["userLoggedIn"];
+
+	if($_SESSION["userLoggedIn"] != $username) {
+		echo "<div class='alert alert-danger' role='alert'>
+				  <h4 class='alert-heading'>Fatal error</h4>
+				  <p>This is not your channel, please go back to your dashboard page. <a href='dashboard.php?username=$session'>$session's Studio Page</a></p>
+				  <hr>
+				  <p class='mb-0'>More Detail: This is not your account!</p>
+				</div>";
+		echo "<h1>WinsVideo Studio</h1>"; 
+		exit();
+	}
 	$profileGenerator = new ProfileGenerator($con, $userLoggedInObj, $profileUsername);
 	echo $profileGenerator->create();
 		
+
 	?> 
 		
-	</center>
+	
 	</div>
 
 	<meta name="viewport" content="width=device-width, initial-scale=0.88, shrink-to-fit=yes">

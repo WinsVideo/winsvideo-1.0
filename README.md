@@ -1,43 +1,28 @@
-# WinsVideo
+# Custom HTML5 Video
 
-A small video sharing site
+Build a custom HTML5 video player with JavaScript. Features:
 
-## About
+- Video and audio playback
+- Native fullscreen
+- Picture-in-Picture
+- Custom controls
+- Keyboard shortcuts
 
-This website was created by me, WinsDominoes. I started this by learning a course on udemy, I added a lot of features. I made this repo so my friends and other could help to develop this platform.
+Tutorial: https://freshman.tech/custom-html5-video/
 
-### What programming language was this written on?
+## Live demo
 
-This project was based / written on mostly PHP.
+This project is live at http://custom-html5-video.surge.sh/
 
-### Will this repo be public?
+## Prerequisites
 
-No, not at the moment
+You must have Node.js and npm installed on your machine. This project was built against the following versions:
 
-## Features
+- Node v12.6.0
+- npm v6.9.0
 
-- Uploading
-- Video Conversion
-- Customizing their status
-- Customizing their channel page
-- Comment
-- Watch Videos
-- Video Manager (not Really)
-- Channel Statistics
-- Customizing their account info
-- Forgot password request. 
+## Setup
 
-And so on.
-
-### More info
-
-I do not guarantee that this project will be safe from XSS wulnerabilities. I made this so people could help find those vulnerabilities and help patch the loophole in the backedns system. 
-
-## Credits
-
-- This udemy cousrse -> https://www.udemy.com/courses/youtube-clone/
-- My friends for helping me to test my website. 
-
-## Final Product
-
-You can check the final product at https://winsvideo.net
+- Clone this repo to your machine
+- `cd` into the project folder and run `npm install`
+- Run `npm start`

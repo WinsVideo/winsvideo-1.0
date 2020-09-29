@@ -16,7 +16,8 @@ class Video {
             $this->sqlData = $input;
         }
         else {
-            $query = $this->con->prepare("SELECT * FROM videos WHERE url = :url");
+            $query = $this->con->prepare("SELECT * FROM videos WHERE id = :id OR url = :url");
+            $query->bindParam(":id", $input);
             $query->bindParam(":url", $input);
             $query->execute();
 

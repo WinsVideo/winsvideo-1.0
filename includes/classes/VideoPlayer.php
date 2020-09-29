@@ -126,7 +126,7 @@ class VideoPlayer {
         // 'playbackRates': [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2] 
         return "
 		<video autoplay id='video' tabindex='-1' class='video-js vjs-matrix vjs-theme-forest vjs-big-play-centered videoPlayer' poster='$thumbnail' controls controlslist='nodownload' style='flex: 1;' preload='auto' data-setup='{}'>
-                    <source src='$filePath' type='video/mp4'>
+                    <source src='https://videos.winsvideo.net/$filePath' type='video/mp4'>
          </video>
 
 

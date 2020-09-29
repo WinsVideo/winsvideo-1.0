@@ -74,8 +74,10 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
 		$leftSidebar = $this->createLeftSidebar();
         return "<div class='content'>
         			$leftSidebar
-        			$mainSidebar
         			$rightSidebar
+        			
+        			$mainSidebar
+        			
         		</div>"; 
 
 		} 
@@ -101,7 +103,7 @@ $userLoggedInObj = new User($con, $usernameLoggedIn);
 			$videos = $this->profileData->getUsersVideos();
 		if(sizeof($videos) > 0) {
             $videoGrid = new VideoGrid($this->con, $this->userLoggedInObj);
-            $videoGridHtml = $videoGrid->create($videos, null, false);
+            $videoGridHtml = $videoGrid->createLarge($videos, null, false);
         }
         else {
             $videoGridHtml = "<span>This user has no videos</span>";

@@ -1,4 +1,9 @@
 <?php 
+
+echo "Sorry, This the custom uploader is not available at the moment. ";
+/*
+
+<?php 
 	include_once("includes/header.php"); 
 ?>
 
@@ -25,7 +30,7 @@
 	<h1>Upload Profile Picture</h1>
 	<p>Upload Profile, by clicking the Choose File Button. Then, click submit.</p>
 		<form action="" method="post" enctype="multipart/form-data">
-			<input type="file" name="file">
+			<input type="file" name="file" accept=".png,.jpg,.gif,.jpeg">
 			<input type="submit" name="submit">
 		</form>
 				<br>
@@ -53,3 +58,6 @@
 <?php 
 	include_once("includes/footer.php"); 
 ?> 
+
+*/
+?>

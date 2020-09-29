@@ -124,7 +124,7 @@ class VideoDetailsFormProvider {
     }
 
 	private function createDeleteButton() {
-        return "<button type='submit' class='btn btn-danger' data-toggle='modal' data-target='#exampleModal' name='deleteButton'>Delete</button>";
+        return "<button type='submit' class='btn btn-danger' name='deleteButton'>Delete Video</button>";
     }
 }
 ?>
